@@ -1,5 +1,4 @@
 <script setup>
-//import Projects from './components/HelloWorld.vue'
 import Navbar from './components/Navbar.vue'
 import Introduction from './components/Introduction.vue'
 import Skills from './components/Skills.vue'

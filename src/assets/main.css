@@ -9,4 +9,6 @@
     src: url("/src/assets/fonts/Questrial-Regular.ttf");
 }
 
-
+html {
+    scroll-behavior: smooth;
+}

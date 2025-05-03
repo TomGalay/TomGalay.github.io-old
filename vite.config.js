@@ -1,42 +1,27 @@
 import { fileURLToPath, URL } from 'node:url'
-
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
-//MPA
-//import { resolve } from 'path'
-
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
+    vue({
+      template: {
+        compilerOptions: {
+          compatConfig: {
+            MODE: 2,
+			TTR_FALSE_VALUE: false // Add this line to disable the compat behavior
+          }
+        }
+      }
+    })
   ],
-  base: "/",
+  base: '/',
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  }
-})
-
-
-
-/*export default defineConfig({
-  plugins: [
-    vue(),
-  ],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  },
-  build: {
-    rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'index.html'),
-        portfolio: resolve(__dirname, 'pages/portfolio-first/index.html'),
-      },
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      'vue': '@vue/compat'  // Add this line to use the compat build
     },
   },
-})*/
+});
+
 

@@ -108,43 +108,13 @@
                             class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">mySQL</span>
                     </div>
                 </div>
-
-                <!--
-                <div class="max-w-sm rounded overflow-hidden shadow-lg justify-self-center">
-                    <img class="w-full" src="src/assets/img/projects/Vapour2.webp" alt="Vapour">
-
-                    <div class="px-6 pt-4 pb-4 mt-2 mb-1">
-                        <a href="https://github.com/TomGalay/TomGalay.github.io" target="_blank"
-                            class="px-7 py-3 md:px-9 md:py-3 m-1 font-medium md:font-semibold bg-gray-700 outline outline-offset-0 outline-1 outline-gray-50 text-gray-50 text-sm rounded-md hover:bg-gray-50 hover:outline-gray-700 hover:text-gray-700 transition ease-linear duration-500">
-                            Github
-                        </a>
-                    </div>
-
-                    <div class="px-6 py-2">
-                        <div class="font-bold text-xl mb-2">Portfolio</div>
-                        <p class="text-gray-700 text-base">
-                            My first portfolio created with HTML, CSS, and JS for animations.
-                        </p>
-                    </div>
-
-                    <div class="px-6 pt-2 pb-2">
-                        <span
-                            class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">HTML</span>
-                        <span
-                            class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">CSS</span>
-                        <span
-                            class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">JS</span>
-                    </div>
-                </div>
-                -->
-
             </div>
             <div class="flex flex-row">
                 <div class="basis-1/4">
                     <h3 class="font-medium text-gray-700 text-2xl md:text-3xl mb-2">Other Projects</h3>
                     <p class="font-normal text-gray-500 text-xs md:text-base mb-8">Some works I've also done for learning</p>
                 </div>
-                <Carousel :items-to-show="1.5" class="basis-3/4 h-full">
+                <Carousel :items-to-show="1.5" class="basis-3/4 h-full" :settings="carouselSettings">
                     <Slide v-for="slide in otherProjects" :key="slide">
                         <div class="max-w-sm rounded overflow-hidden shadow-lg text-start">
                             <img class="w-full" v-bind:src="slide.imageSrc" alt="Vapour">
@@ -187,10 +157,14 @@
 
 // If you are using PurgeCSS, make sure to whitelist the carousel CSS classes
 import 'vue3-carousel/dist/carousel.css'
-import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+import { Carousel, Slide, Pagination } from 'vue3-carousel'
+import { defineAsyncComponent } from 'vue'
 import portfolioFirst from '/src/assets/img/projects/Portfolio-first.webp'
 import laraGigs from '/src/assets/img/projects/Laragigs.webp'
 import wordpressDemo from '/src/assets/img/projects/WordPress-Demo.webp'
+
+// Define Navigation as an async component
+const Navigation = defineAsyncComponent(() => import('vue3-carousel').then(module => module.Navigation))
 
 export default {
     name: 'App',
@@ -228,10 +202,14 @@ export default {
                     tags: ['WordPress', 'PHP', 'JS', 'HTML', 'CSS'],
                     description: 'WordPress site with custom plugin and themes for demo purposes. Features registration with profiles and admin dashboard',
                     btn: {
-                        'Github' : 'hhttps://github.com/TomGalay/wordpress-demo', 
+                        'Github' : 'https://github.com/TomGalay/wordpress-demo', 
                     },
                 },
-            ]
+            ],
+				carouselSettings: {
+				itemsToShow: 1.5,
+				snapAlign: 'center'
+      		},
         }
     }
 
